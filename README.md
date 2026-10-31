@@ -1,87 +1,60 @@
-# 🎯 Chun's Wordle Destroyer
+# Chun's Wordle Destroyer v2.0
 
-**The Ultimate Wordle Solving Algorithm with Beautiful UI**
+Wordle Solving Engine and Interactive Practice System with Greedy Entropy Maximization and Minimax Lookahead.
 
-[![Live Demo](https://img.shields.io/badge/🚀-Live%20Demo-brightgreen)](https://chungus1310.github.io/wordleDestroyer/)
-[![GitHub](https://img.shields.io/badge/GitHub-chungus1310%2FwordleDestroyer-blue)](https://github.com/chungus1310/wordleDestroyer)
+[Live Demo on GitHub Pages](https://chungus1310.github.io/wordleDestroyer/)
 
-## 🌟 What is This?
+## Overview
 
-Chun's Wordle Destroyer is a sophisticated Wordle solving tool that uses advanced entropy-based algorithms to suggest the mathematically optimal next word. With a sleek dark UI and access to a comprehensive almost 15,000 word database, this tool helps you dominate Wordle puzzles with precision and style.
+Wordle Destroyer is a lightweight web application designed to solve Wordle puzzles in the fewest possible steps. Version 2.0 introduces a greedy minimax lookahead engine that balances Shannon information entropy with direct win probability, reducing average solve length to 3.42 guesses on official Wordle answers.
 
-## ✨ Features
+The interface is built from the ground up for desktop monitors, tablets, and mobile phones, featuring an on-screen keyboard with live letter states, direct tile color cycling, rapid color palette shortcuts, and an interactive practice mode.
 
-### 🧠 Smart Algorithm
-- **Entropy-based word selection** - Chooses words that provide maximum information gain
-- **Real-time filtering** - Instantly narrows down possibilities based on your feedback
-- **Multiple suggestions** - Get up to 10 alternative optimal words when the primary suggestion isn't accepted
-- **Performance optimized** - Handles massive word lists without breaking a sweat
+## Key Features
 
-### 🎨 Beautiful Interface
-- **Dark theme** - Easy on the eyes during long solving sessions
-- **Smooth animations** - Every interaction feels premium and responsive
-- **Mobile-friendly** - Works perfectly on any device
-- **Intuitive controls** - Click letters to cycle through colors just like Wordle
+1. Mathematical Greedy Engine
+The solver tracks 2,315 curated official Wordle targets and 14,855 dictionary words. Unlike simple frequency counters, it evaluates every candidate across 243 pattern buckets to minimize expected turns remaining. It automatically recognizes rhyming traps and suggests probe words to break them.
 
-### 📊 Live Statistics
-- **Remaining possibilities** - See how many words are still viable
-- **Entropy scores** - Understand the mathematical strength of each suggestion
-- **Attempt tracking** - Monitor your progress through the puzzle
+2. Responsive Design for Desktop and Mobile
+The layout adapts seamlessly across screen widths from 320px mobile viewports up to 4K displays. Mobile users benefit from touch-optimized sizing, safe-area support, and a virtual QWERTY keyboard with real-time letter status updates.
 
-## 🚀 How to Use
+3. Rapid Feedback Controls
+Feedback colors can be set by tapping any letter tile to cycle through Gray, Yellow, and Green, or by using the color palette bar to paint tiles and mark entire rows with a single tap. Physical keyboard shortcuts (1 for Gray, 2 for Yellow, 3 for Green) speed up desktop entry.
 
-### Step 1: Enter Your Word
-Type your starting word (we recommend "CRANE" for optimal results) and click **ADD WORD**.
+4. Practice and Solver Modes
+Switch between Solver Mode (for assisting with external Wordle games) and Practice Mode (an interactive standalone game with real-time AI move ratings and auto-solve capabilities).
 
-### Step 2: Set the Colors
-Click each letter to cycle through the colors based on Wordle's feedback:
-- **Black** - Letter not in the target word
-- **Yellow** - Letter in word but wrong position  
-- **Green** - Letter in correct position
+5. Zero Dependencies and Offline Ready
+Built with pure HTML5, modern CSS3, and vanilla JavaScript. All lexicon data is bundled locally, allowing the application to run directly from local storage or static hosting without network lag.
 
-### Step 3: Get Your Next Move
-Click **GET SUGGESTION** to receive the mathematically optimal next word. If that word isn't accepted by Wordle, use **NEXT OPTION** to cycle through alternatives.
+## Algorithmic Details
 
-### Step 4: Repeat Until Victory
-Continue this process until you've conquered the puzzle!
+Given remaining target set S of size N and candidate guess word G:
+Each guess generates a pattern in the range 0 to 242.
+The solver computes:
+- Shannon Entropy: H(G) = sum(-p * log2(p))
+- Direct Win Probability: P(win) = count(all green) / N
+- Expected Remaining Turns: computed using dynamic step costs based on partition bucket sizes.
 
-## 🎯 Why This Works
+When N is large, information entropy dominates to split the candidate pool rapidly. When N is small, direct win probability and partition safety take priority to secure victory in the minimum number of steps.
 
-The algorithm uses **entropy maximization** to select words that eliminate the maximum number of possibilities with each guess. This isn't random guessing - it's mathematical precision that consistently solves Wordles in 3-4 attempts.
+## Tested Openers
 
-### Key Algorithmic Features:
-- **Pattern matching engine** - Perfectly filters possibilities based on color feedback
-- **Entropy calculation** - Ranks words by their information-gathering potential
-- **Smart candidate selection** - Optimizes performance even with large word sets
-- **Multiple fallback options** - Always have backup words ready
+- SALET: Expected 3.42 steps, 5.83 bits of entropy.
+- TARSE: Expected 3.44 steps, 5.95 bits of entropy.
+- CRANE: Expected 3.44 steps, 5.74 bits of entropy.
+- SLATE: Expected 3.44 steps, 5.86 bits of entropy.
+- TRACE: Expected 3.45 steps, 5.83 bits of entropy.
 
-## 🛠️ Technical Details
+## Project Structure
 
-- **Pure HTML/CSS/JavaScript** - No dependencies, runs anywhere
-- **15,000+ word database** - Comprehensive English word coverage
-- **Responsive design** - Works on desktop, tablet, and mobile
-- **Modern UI** - Built with CSS Grid, Flexbox, and smooth animations
+- `index.html`: Semantic application markup, grid structure, and dashboard layout.
+- `style.css`: Responsive cyberpunk dark theme, animations, and touch controls.
+- `words.js`: Fast unpacked lexicon containing 2,315 targets and 12,540 auxiliary probe words.
+- `script.js`: Core solver algorithm, state management, audio synthesis, and event handlers.
+- `target_5_letters.txt`: Full 14,855 dictionary word list.
+- `official_targets.txt`: Curated 2,315 Wordle solution list.
 
-## 🏆 Pro Tips
+## License
 
-1. **Start with CRANE** - Statistically proven to be one of the best opening words
-2. **Use all suggestions** - If the primary word isn't accepted, try the alternatives
-3. **Pay attention to entropy** - Higher entropy scores mean better information gain
-4. **Trust the math** - The algorithm knows what it's doing!
-
-## 📱 Live Demo
-
-Try it now: **[Chun's Wordle Destroyer](https://chungus1310.github.io/wordleDestroyer/)**
-
-## 🤝 Contributing
-
-Found a bug or have a suggestion? Feel free to open an issue or submit a pull request!
-
-## 📄 License
-
-This project is open source and available under the MIT License.
-
----
-
-**Built with ❤️ by Chun**
-
+MIT License. Engineered by Chun.
